@@ -1,0 +1,6 @@
+{
+  "name": "Kepler",
+  "description": "Kepler Sinhala & English AI Subtitle Studio with Auto Zoom, AI B-Roll, and MP4 Export",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

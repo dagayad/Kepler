@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Kepler</string>
+    <string name="studio_subtitle">Sinhala &amp; English AI Subtitle Studio</string>
+    <string name="action_import_video">Import Video</string>
+    <string name="action_record_video">Record Clip</string>
+    <string name="action_export">Export</string>
+    <string name="action_generate_subtitles">Generate AI Subtitles</string>
+    <string name="action_generate_broll">Generate AI B-Roll</string>
+    <string name="tab_subtitles">Subtitles</string>
+    <string name="tab_auto_zoom">Auto Zoom</string>
+    <string name="tab_ai_broll">AI B-Roll</string>
+    <string name="tab_style">Style</string>
+    <string name="tab_export">Export</string>
+    <string name="hero_banner_desc">Kepler Studio dark timeline and Sinhala caption workspace illustration</string>
+    <string name="empty_projects_tip">Import a vertical or landscape video to generate Sinhala Unicode subtitles, Ken Burns zoom, and AI B-Roll.</string>
+    <string name="error_no_video_selected">Please select a video file first.</string>
+    <string name="error_audio_too_large">Audio track exceeds the 20 MB inline limit. Try a shorter clip under 15 minutes.</string>
+</resources>
