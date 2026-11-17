@@ -754,7 +754,10 @@ fun ExportInspectorPanel(
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         Text("Target Platform Aspect Ratio", style = MaterialTheme.typography.titleSmall, color = TextSecondary)
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        Row(
+            modifier = Modifier.horizontalScroll(rememberScrollState()),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
             ExportAspectRatio.entries.forEach { ratio ->
                 FilterChip(
                     selected = project.aspectRatio == ratio,
@@ -766,6 +769,32 @@ fun ExportInspectorPanel(
                     )
                 )
             }
+        }
+
+        val targetW = if (project.resolution == ExportResolution.FHD_1080P) {
+            project.aspectRatio.outWidth1080
+        } else {
+            project.aspectRatio.outWidth720
+        }
+        val targetH = if (project.resolution == ExportResolution.FHD_1080P) {
+            project.aspectRatio.outHeight1080
+        } else {
+            project.aspectRatio.outHeight720
+        }
+
+        Surface(
+            shape = RoundedCornerShape(10.dp),
+            color = VeedIndigo.copy(alpha = 0.14f),
+            border = BorderStroke(1.dp, VeedIndigo.copy(alpha = 0.45f))
+        ) {
+            Text(
+                text = "Output MP4: ${targetW} × ${targetH} px (${project.resolution.displayName})",
+                style = MaterialTheme.typography.labelLarge,
+                color = TextPrimary,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp, vertical = 8.dp)
+            )
         }
 
         Text("Resolution", style = MaterialTheme.typography.titleSmall, color = TextSecondary)

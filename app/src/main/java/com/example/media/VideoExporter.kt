@@ -77,10 +77,11 @@ class VideoExporter(private val context: Context) {
 
         val videoEffects = mutableListOf<Effect>()
 
-        // 1. Target Aspect Ratio Presentation (9:16 Reels / 16:9 YouTube / 1:1 Square)
+        // 1. Target Social Media Dimensions (9:16 1080x1920, 16:9 1920x1080, 4:5 1080x1350, 1:1 1080x1080)
         videoEffects.add(
-            Presentation.createForAspectRatio(
-                project.aspectRatio.ratioFloat,
+            Presentation.createForWidthAndHeight(
+                outWidth,
+                outHeight,
                 Presentation.LAYOUT_SCALE_TO_FIT_WITH_CROP
             )
         )

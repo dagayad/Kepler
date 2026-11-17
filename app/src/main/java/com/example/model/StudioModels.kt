@@ -100,6 +100,7 @@ enum class ExportAspectRatio(
 ) {
     REELS_9_16("9:16 Reels", 9f / 16f, 1080, 1920, 720, 1280),
     YOUTUBE_16_9("16:9 YouTube", 16f / 9f, 1920, 1080, 1280, 720),
+    PORTRAIT_4_5("4:5 Feed", 4f / 5f, 1080, 1350, 720, 900),
     SQUARE_1_1("1:1 Square", 1f, 1080, 1080, 720, 720)
 }
 

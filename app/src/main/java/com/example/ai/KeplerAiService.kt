@@ -209,6 +209,7 @@ class KeplerAiService {
         val targetRatio = when (aspectRatio) {
             ExportAspectRatio.REELS_9_16 -> AspectRatio.PORTRAIT_9x16
             ExportAspectRatio.YOUTUBE_16_9 -> AspectRatio.LANDSCAPE_16x9
+            ExportAspectRatio.PORTRAIT_4_5 -> AspectRatio.PORTRAIT_3x4
             ExportAspectRatio.SQUARE_1_1 -> AspectRatio.SQUARE_1x1
         }
 
