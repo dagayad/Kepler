@@ -16,13 +16,16 @@ jobs:
 
       - name: Verify or restore google-services.json
         env:
-          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          SECRET_GS_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          VAR_GS_JSON: ${{ vars.GOOGLE_SERVICES_JSON }}
         run: |
-          if [ ! -f app/google-services.json ] && [ -n "$GOOGLE_SERVICES_JSON" ]; then
-            printf '%s' "$GOOGLE_SERVICES_JSON" > app/google-services.json
+          GS_CONTENT="${SECRET_GS_JSON:-$VAR_GS_JSON}"
+          if [ ! -f app/google-services.json ] && [ -n "$GS_CONTENT" ]; then
+            printf '%s\n' "$GS_CONTENT" > app/google-services.json
+            echo "Restored app/google-services.json from GitHub Secrets/Variables."
           fi
           if [ ! -f app/google-services.json ]; then
-            echo "::error::app/google-services.json is missing from the repository. AI Studio may exclude it on GitHub push. Add app/google-services.json to your GitHub repo or create a repository secret named GOOGLE_SERVICES_JSON with its contents."
+            echo "::error::app/google-services.json is missing and GOOGLE_SERVICES_JSON secret/variable is empty. Go to GitHub Repo -> Settings -> Secrets and variables -> Actions -> New repository secret -> Name: GOOGLE_SERVICES_JSON."
             exit 1
           fi
 
