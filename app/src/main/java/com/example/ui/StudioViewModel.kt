@@ -169,9 +169,23 @@ class StudioViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    private fun ensureFirebaseReady(): Boolean {
+        if (com.google.firebase.FirebaseApp.getApps(appContext).isEmpty()) {
+            com.google.firebase.FirebaseApp.initializeApp(appContext)
+        }
+        if (com.google.firebase.FirebaseApp.getApps(appContext).isEmpty()) {
+            _aiTaskState.value = AiTaskState.Error(
+                "Firebase is not configured in this APK (missing google-services.json). Build the APK from AI Studio or add GOOGLE_SERVICES_JSON in GitHub Actions."
+            )
+            return false
+        }
+        return true
+    }
+
     fun generateAutoSubtitlesAndPlan() {
         val project = _activeProject.value ?: return
         val metadata = project.videoMetadata ?: return
+        if (!ensureFirebaseReady()) return
 
         viewModelScope.launch {
             try {
@@ -223,6 +237,7 @@ class StudioViewModel(application: Application) : AndroidViewModel(application) 
             )
             return
         }
+        if (!ensureFirebaseReady()) return
 
         viewModelScope.launch {
             try {
@@ -270,6 +285,7 @@ class StudioViewModel(application: Application) : AndroidViewModel(application) 
     fun generateSingleBRoll(itemId: String) {
         val project = _activeProject.value ?: return
         val item = project.bRollItems.firstOrNull { it.id == itemId } ?: return
+        if (!ensureFirebaseReady()) return
 
         viewModelScope.launch {
             try {

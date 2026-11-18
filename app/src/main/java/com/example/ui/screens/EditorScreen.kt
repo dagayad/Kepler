@@ -391,7 +391,9 @@ fun EditorScreen(
                                     Text(
                                         text = tab.title,
                                         maxLines = 1,
-                                        overflow = TextOverflow.Ellipsis
+                                        softWrap = false,
+                                        style = MaterialTheme.typography.labelSmall,
+                                        overflow = TextOverflow.Clip
                                     )
                                 },
                                 colors = NavigationBarItemDefaults.colors(

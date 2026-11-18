@@ -14,6 +14,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Verify or restore google-services.json
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+        run: |
+          if [ ! -f app/google-services.json ] && [ -n "$GOOGLE_SERVICES_JSON" ]; then
+            printf '%s' "$GOOGLE_SERVICES_JSON" > app/google-services.json
+          fi
+          if [ ! -f app/google-services.json ]; then
+            echo "::error::app/google-services.json is missing from the repository. AI Studio may exclude it on GitHub push. Add app/google-services.json to your GitHub repo or create a repository secret named GOOGLE_SERVICES_JSON with its contents."
+            exit 1
+          fi
+
       - name: Set up JDK 21
         uses: actions/setup-java@v5
         with:
